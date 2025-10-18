@@ -35,4 +35,9 @@ public class Board {
         return pieces[position.getRow()][position.getColumn()]; //retornando a peca que esta na posicao da linha e da coluna
     }
 
+    public void placePiece(Piece piece, Position position){ //vai na matriz de pecas e atribuir a peca que vir como argumento
+        pieces[position.getRow()][position.getColumn()] =  piece;
+        piece.position = position;
+    }
+
 }
