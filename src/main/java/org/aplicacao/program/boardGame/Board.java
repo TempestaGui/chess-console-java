@@ -32,7 +32,7 @@ public class Board {
     }
 
     public Piece piece(Position position){
-        return pieces[position.getRow()][position.getColumn()];
+        return pieces[position.getRow()][position.getColumn()]; //retornando a peca que esta na posicao da linha e da coluna
     }
 
 }
