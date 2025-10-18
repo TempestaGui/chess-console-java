@@ -1,6 +1,9 @@
 package org.aplicacao.program.chess;
 
 import org.aplicacao.program.boardGame.Board;
+import org.aplicacao.program.boardGame.Position;
+import org.aplicacao.program.chess.pieces.King;
+import org.aplicacao.program.chess.pieces.Rook;
 
 public class ChessMatch {
 
@@ -8,6 +11,7 @@ public class ChessMatch {
 
     public ChessMatch(){
         board = new Board(8,8);
+        initialSetup();
     }
 
     public ChessPiece[][] getPieces(){ //liberando para o programa uma matriz chessPiece para que o programa conheça apenas a camada de xadrez e nao a camada de tabuleiro
@@ -18,5 +22,12 @@ public class ChessMatch {
             }
         }
         return mat;
+    }
+
+    private void initialSetup(){ //responsavel por iniciar a partida colocando as pecas no tabuleiro
+        board.placePiece(new Rook(board, Color.white), new Position(2,1));
+        board.placePiece(new King(board, Color.Black), new Position(0, 4));
+        board.placePiece(new King(board, Color.white), new Position(7, 4));
+
     }
 }
