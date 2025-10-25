@@ -1,7 +1,9 @@
 package org.aplicacao.program.chess;
 
 import org.aplicacao.program.boardGame.Board;
+import org.aplicacao.program.boardGame.Piece;
 import org.aplicacao.program.boardGame.Position;
+import org.aplicacao.program.chess.Exceptions.ChessException;
 import org.aplicacao.program.chess.pieces.King;
 import org.aplicacao.program.chess.pieces.Rook;
 
@@ -43,5 +45,27 @@ public class ChessMatch {
         placeNewPiece('e', 8 ,new Rook(board, Color.Black));
         placeNewPiece('d', 8 ,new King(board, Color.Black));
 
+    }
+
+    public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition destinationPosition){
+        Position source = sourcePosition.toPosition();
+        Position destination = destinationPosition.toPosition();
+        validateSourcePosition(source);
+
+        Piece capturedPiece = makeMove(source, destination);
+        return (ChessPiece) capturedPiece;
+    }
+
+    private Piece makeMove(Position source, Position destination){
+        Piece p  = board.removePiece(source);
+        Piece capturedPiece = board.removePiece(destination);
+        board.placePiece(p, destination);
+        return capturedPiece;
+    }
+
+    private void validateSourcePosition(Position position){
+        if(!board.thereIsAPiece(position)){
+            throw new ChessException("Piece dont exist in this position "+position);
+        }
     }
 }

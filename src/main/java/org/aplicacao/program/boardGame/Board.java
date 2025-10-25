@@ -55,7 +55,7 @@ public class Board {
     }
 
     public Piece removePiece(Position position){
-        if (!thereIsAPiece(position)) {
+        if (!positionExists(position)) {
             throw new BoardException("Piece dont exist in this position "+position);
         }
         if(piece(position) == null){
@@ -63,12 +63,11 @@ public class Board {
         }
         Piece aux = piece(position);
         aux.position = null; //removendo peca nessa posicao
-        pieces[position.getRow()][position.getRow()] = null; //na minha matriz nesta posicao vai ser nulo
+        pieces[position.getRow()][position.getColumn()] = null; //na minha matriz nesta posicao vai ser nulo
         return aux;
     }
 
-    public boolean positionExists(Position position){
-        return positionExists(position.getRow(), position.getColumn());
+    public boolean positionExists(Position position){return positionExists(position.getRow(), position.getColumn());
     }
 
     private boolean positionExists(int row, int column){
