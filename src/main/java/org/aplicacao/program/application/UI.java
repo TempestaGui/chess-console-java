@@ -72,7 +72,7 @@ public class UI {
 
     private static void printPiece(ChessPiece piece, boolean background){ // metodo auxiliar que vai ser responsavel por imprimir uma peca ou "-" caso nao tenha
         if(background){
-            System.out.print(ANSI_GREEN_BACKGROUND);
+            System.out.print(ANSI_PURPLE_BACKGROUND);
         }
         if(piece == null){
             System.out.print("-" + ANSI_RESET);
