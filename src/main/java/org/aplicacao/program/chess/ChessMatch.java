@@ -78,4 +78,10 @@ public class ChessMatch {
             throw new ChessException("the chosen piece can`t move to target position "+target);
         }
     }
+
+    public boolean[][] possibleMoves(ChessPosition sourcePosition){
+        Position position = sourcePosition.toPosition();
+        validateSourcePosition(position);
+        return board.piece(position).possibleMoves();
+    }
 }

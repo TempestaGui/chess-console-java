@@ -52,16 +52,30 @@ public class UI {
         for(int i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " "); //imprimir o rotulo lateral de 1 a 8
             for(int j = 0; j < pieces.length; j++) {
-                printPiece(pieces[i][j]); //imprimir a peca na posicao i, j
+                printPiece(pieces[i][j], false); //imprimir a peca na posicao i, j
             }
             System.out.println(); //quebra de linha
         }
         System.out.println("  a b c d e f g h"); //rotulo inferior
     }
 
-    private static void printPiece(ChessPiece piece){ // metodo auxiliar que vai ser responsavel por imprimir uma peca ou "-" caso nao tenha
+    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+        for(int i = 0; i < pieces.length; i++) {
+            System.out.print((8 - i) + " "); //imprimir o rotulo lateral de 1 a 8
+            for(int j = 0; j < pieces.length; j++) {
+                printPiece(pieces[i][j], possibleMoves[i][j]); //imprimir a peca na posicao i, j com o fundo colorido
+            }
+            System.out.println(); //quebra de linha
+        }
+        System.out.println("  a b c d e f g h"); //rotulo inferior
+    }
+
+    private static void printPiece(ChessPiece piece, boolean background){ // metodo auxiliar que vai ser responsavel por imprimir uma peca ou "-" caso nao tenha
+        if(background){
+            System.out.print(ANSI_GREEN_BACKGROUND);
+        }
         if(piece == null){
-            System.out.print("-");
+            System.out.print("-" + ANSI_RESET);
         }
         else {
             if(piece.getColor() == Color.white){
