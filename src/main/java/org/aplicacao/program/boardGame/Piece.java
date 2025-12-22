@@ -15,7 +15,7 @@ public abstract class Piece {
         return board;
     }
 
-    //rookMethods
+    //rookMethods metodo que faz um gancho com a subclasse
     public abstract boolean[][] possibleMoves();
 
     public boolean possibleMove(Position position){
@@ -33,4 +33,6 @@ public abstract class Piece {
         }
         return false;
     }
+
+
 }
