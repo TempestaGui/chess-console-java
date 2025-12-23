@@ -34,6 +34,9 @@ public class ChessMatch {
     public Color getCurrentPlayer(){
         return currentPlayer;
     }
+    public boolean getCheck(){
+        return check;
+    }
 
     public ChessPiece[][] getPieces(){ //liberando para o programa uma matriz chessPiece para que o programa conheça apenas a camada de xadrez e nao a camada de tabuleiro
         ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumns()]; //quantidade de linhas e colunas do tabuleiro
@@ -74,6 +77,14 @@ public class ChessMatch {
         validateTargetPosition(source, destination);
 
         Piece capturedPiece = makeMove(source, destination);
+
+        if(testCheck(currentPlayer)){
+            undoMove(source, destination, capturedPiece);
+            throw new ChessException("You can`t put yourself in check!!");
+        }
+
+        check = (testCheck(opponent(currentPlayer))) ? true : false;
+
         nextTurn();
         return (ChessPiece) capturedPiece;
     }
@@ -136,7 +147,7 @@ public class ChessMatch {
 
     private ChessPiece king(Color color){
         List<Piece> list = piecesOnTheBoard.stream()
-                .filter(x -> ((ChessPiece)x).getColor() == color).collect(Collectors.toList());
+                .filter(x -> ((ChessPiece)x).getColor() == color).toList();
 
         for(Piece p: list){
             if(p instanceof King){
@@ -144,5 +155,20 @@ public class ChessMatch {
             }
         }
         throw new IllegalStateException("There is no "+color+" King on the board!");
+    }
+
+    private boolean testCheck(Color color){
+        Position kingPosition = king(color).getChessPosition().toPosition();
+        List<Piece> opponentPieces =  piecesOnTheBoard.stream()
+                .filter(x -> ((ChessPiece)x).getColor() == opponent(color)).toList();
+
+        for(Piece p: opponentPieces){
+            boolean[][] mat = p.possibleMoves();
+
+            if(mat[kingPosition.getRow()][kingPosition.getColumn()]){
+                return true;
+            }
+        }
+        return false;
     }
 }
