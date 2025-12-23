@@ -9,11 +9,22 @@ import org.aplicacao.program.chess.pieces.Rook;
 
 public class ChessMatch {
 
-    private Board board;
+    private final Board board;
+    private int turn;
+    private Color currentPlayer;
 
     public ChessMatch(){
         board = new Board(8,8);
+        turn = 1;
+        currentPlayer = Color.Blue;
         initialSetup();
+    }
+
+    public int getTurn(){
+        return turn;
+    }
+    public Color getCurrentPlayer(){
+        return currentPlayer;
     }
 
     public ChessPiece[][] getPieces(){ //liberando para o programa uma matriz chessPiece para que o programa conheça apenas a camada de xadrez e nao a camada de tabuleiro
@@ -31,19 +42,19 @@ public class ChessMatch {
     }
 
     private void initialSetup(){ //responsavel por iniciar a partida colocando as pecas no tabuleiro
-        placeNewPiece('c', 1 ,new Rook(board, Color.white));
-        placeNewPiece('c', 2 ,new Rook(board, Color.white));
-        placeNewPiece('d', 2 ,new Rook(board, Color.white));
-        placeNewPiece('e', 2 ,new Rook(board, Color.white));
-        placeNewPiece('e', 1 ,new Rook(board, Color.white));
-        placeNewPiece('d', 1 ,new King(board, Color.white));
+        placeNewPiece('c', 1 ,new Rook(board, Color.Blue));
+        placeNewPiece('c', 2 ,new Rook(board, Color.Blue));
+        placeNewPiece('d', 2 ,new Rook(board, Color.Blue));
+        placeNewPiece('e', 2 ,new Rook(board, Color.Blue));
+        placeNewPiece('e', 1 ,new Rook(board, Color.Blue));
+        placeNewPiece('d', 1 ,new King(board, Color.Blue));
 
-        placeNewPiece('c', 7 ,new Rook(board, Color.Black));
-        placeNewPiece('c', 8 ,new Rook(board, Color.Black));
-        placeNewPiece('d', 7 ,new Rook(board, Color.Black));
-        placeNewPiece('e', 7 ,new Rook(board, Color.Black));
-        placeNewPiece('e', 8 ,new Rook(board, Color.Black));
-        placeNewPiece('d', 8 ,new King(board, Color.Black));
+        placeNewPiece('c', 7 ,new Rook(board, Color.Red));
+        placeNewPiece('c', 8 ,new Rook(board, Color.Red));
+        placeNewPiece('d', 7 ,new Rook(board, Color.Red));
+        placeNewPiece('e', 7 ,new Rook(board, Color.Red));
+        placeNewPiece('e', 8 ,new Rook(board, Color.Red));
+        placeNewPiece('d', 8 ,new King(board, Color.Red));
 
     }
 
@@ -54,6 +65,7 @@ public class ChessMatch {
         validateTargetPosition(source, destination);
 
         Piece capturedPiece = makeMove(source, destination);
+        nextTurn();
         return (ChessPiece) capturedPiece;
     }
 
@@ -67,6 +79,9 @@ public class ChessMatch {
     private void validateSourcePosition(Position position){
         if(!board.thereIsAPiece(position)){
             throw new ChessException("Piece dont exist in this position "+position);
+        }
+        if(currentPlayer != ((ChessPiece)board.piece(position)).getColor()){
+            throw new ChessException("the chosen piece is not yours, "+getCurrentPlayer() +" is yours piece!!");
         }
         if(!board.piece(position).isThereAnyPossibleMove()){
             throw new ChessException("There is no possible moves for the chosen piece "+position);
@@ -83,5 +98,10 @@ public class ChessMatch {
         Position position = sourcePosition.toPosition();
         validateSourcePosition(position);
         return board.piece(position).possibleMoves();
+    }
+
+    private void nextTurn(){
+        turn++;
+        currentPlayer = (currentPlayer == Color.Blue) ? Color.Red : Color.Blue;
     }
 }

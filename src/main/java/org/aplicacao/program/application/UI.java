@@ -1,5 +1,6 @@
 package org.aplicacao.program.application;
 
+import org.aplicacao.program.chess.ChessMatch;
 import org.aplicacao.program.chess.ChessPiece;
 import org.aplicacao.program.chess.ChessPosition;
 import org.aplicacao.program.chess.Color;
@@ -47,6 +48,13 @@ public class UI {
         }
     }
 
+    public static void printMatch(ChessMatch chesMatch){
+        printBoard(chesMatch.getPieces());
+        System.out.println();
+        System.out.println("Turn: "+chesMatch.getTurn());
+        System.out.println("Waiting player: "+chesMatch.getCurrentPlayer());
+    }
+
 
     public static void printBoard(ChessPiece[][] pieces) {
         for(int i = 0; i < pieces.length; i++) {
@@ -78,7 +86,7 @@ public class UI {
             System.out.print("-" + ANSI_RESET);
         }
         else {
-            if(piece.getColor() == Color.white){
+            if(piece.getColor() == Color.Blue){
                 System.out.print(ANSI_BLUE + piece + ANSI_RESET);
             } else{
                 System.out.print(ANSI_RED + piece + ANSI_RESET);
