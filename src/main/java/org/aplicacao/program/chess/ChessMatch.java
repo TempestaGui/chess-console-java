@@ -5,6 +5,7 @@ import org.aplicacao.program.boardGame.Piece;
 import org.aplicacao.program.boardGame.Position;
 import org.aplicacao.program.chess.Exceptions.ChessException;
 import org.aplicacao.program.chess.pieces.King;
+import org.aplicacao.program.chess.pieces.Pawn;
 import org.aplicacao.program.chess.pieces.Rook;
 
 import java.util.ArrayList;
@@ -55,12 +56,29 @@ public class ChessMatch {
     }
 
     private void initialSetup(){ //responsavel por iniciar a partida colocando as pecas no tabuleiro
-        placeNewPiece('h', 7 ,new Rook(board, Color.Blue));
-        placeNewPiece('d', 1 ,new Rook(board, Color.Blue));
+        placeNewPiece('a', 1 ,new Rook(board, Color.Blue));
         placeNewPiece('e', 1 ,new King(board, Color.Blue));
+        placeNewPiece('h', 1 ,new Rook(board, Color.Blue));
+        placeNewPiece('a', 2 ,new Pawn(board, Color.Blue));
+        placeNewPiece('b', 2 ,new Pawn(board, Color.Blue));
+        placeNewPiece('c', 2 ,new Pawn(board, Color.Blue));
+        placeNewPiece('d', 2 ,new Pawn(board, Color.Blue));
+        placeNewPiece('e', 2 ,new Pawn(board, Color.Blue));
+        placeNewPiece('f', 2 ,new Pawn(board, Color.Blue));
+        placeNewPiece('g', 2 ,new Pawn(board, Color.Blue));
+        placeNewPiece('h', 2 ,new Pawn(board, Color.Blue));
 
-        placeNewPiece('b', 8 ,new Rook(board, Color.Red));
-        placeNewPiece('a', 8 ,new King(board, Color.Red));
+        placeNewPiece('a', 8 ,new Rook(board, Color.Red));
+        placeNewPiece('e', 8 ,new King(board, Color.Red));
+        placeNewPiece('h', 8 ,new Rook(board, Color.Red));
+        placeNewPiece('a', 7 ,new Pawn(board, Color.Red));
+        placeNewPiece('b', 7 ,new Pawn(board, Color.Red));
+        placeNewPiece('c', 7 ,new Pawn(board, Color.Red));
+        placeNewPiece('d', 7 ,new Pawn(board, Color.Red));
+        placeNewPiece('e', 7 ,new Pawn(board, Color.Red));
+        placeNewPiece('f', 7 ,new Pawn(board, Color.Red));
+        placeNewPiece('g', 7 ,new Pawn(board, Color.Red));
+        placeNewPiece('h', 7 ,new Pawn(board, Color.Red));
 
     }
 
