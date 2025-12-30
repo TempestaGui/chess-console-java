@@ -57,6 +57,7 @@ public class ChessMatch {
         placeNewPiece('a', 1 ,new Rook(board, Color.Blue));
         placeNewPiece('b', 1 ,new Knight(board, Color.Blue));
         placeNewPiece('c', 1 ,new Bishop(board, Color.Blue));
+        placeNewPiece('d', 1 ,new Queen(board, Color.Blue));
         placeNewPiece('e', 1 ,new King(board, Color.Blue));
         placeNewPiece('f', 1 ,new Bishop(board, Color.Blue));
         placeNewPiece('g', 1, new Knight(board, Color.Blue));
@@ -73,6 +74,7 @@ public class ChessMatch {
         placeNewPiece('a', 8 ,new Rook(board, Color.Red));
         placeNewPiece('b', 8 ,new Knight(board, Color.Red));
         placeNewPiece('c', 8 ,new Bishop(board, Color.Red));
+        placeNewPiece('d', 8 ,new Queen(board, Color.Red));
         placeNewPiece('e', 8 ,new King(board, Color.Red));
         placeNewPiece('f', 8 ,new Bishop(board, Color.Red));
         placeNewPiece('g', 8 ,new Knight(board, Color.Red));
