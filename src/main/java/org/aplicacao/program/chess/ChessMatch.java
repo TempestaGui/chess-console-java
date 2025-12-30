@@ -58,7 +58,7 @@ public class ChessMatch {
         placeNewPiece('b', 1 ,new Knight(board, Color.Blue));
         placeNewPiece('c', 1 ,new Bishop(board, Color.Blue));
         placeNewPiece('d', 1 ,new Queen(board, Color.Blue));
-        placeNewPiece('e', 1 ,new King(board, Color.Blue));
+        placeNewPiece('e', 1 ,new King(board, Color.Blue, this));
         placeNewPiece('f', 1 ,new Bishop(board, Color.Blue));
         placeNewPiece('g', 1, new Knight(board, Color.Blue));
         placeNewPiece('h', 1 ,new Rook(board, Color.Blue));
@@ -75,7 +75,7 @@ public class ChessMatch {
         placeNewPiece('b', 8 ,new Knight(board, Color.Red));
         placeNewPiece('c', 8 ,new Bishop(board, Color.Red));
         placeNewPiece('d', 8 ,new Queen(board, Color.Red));
-        placeNewPiece('e', 8 ,new King(board, Color.Red));
+        placeNewPiece('e', 8 ,new King(board, Color.Red, this));
         placeNewPiece('f', 8 ,new Bishop(board, Color.Red));
         placeNewPiece('g', 8 ,new Knight(board, Color.Red));
         placeNewPiece('h', 8 ,new Rook(board, Color.Red));
@@ -123,6 +123,25 @@ public class ChessMatch {
             piecesOnTheBoard.remove(capturedPiece);
             capturedPieces.add(capturedPiece);
         }
+
+        // #specialMove castling Kingside rook
+        if(p instanceof King && destination.getColumn() == source.getColumn() + 2){
+            Position sourceT = new Position(source.getRow(), source.getColumn() + 3);
+            Position targetT = new Position(sourceT.getRow(), source.getColumn() + 1);
+            ChessPiece rook = (ChessPiece)board.removePiece(sourceT);
+            board.placePiece(rook, targetT);
+            rook.increaseMoveCount();
+        }
+
+        // #specialMove castling QueenSide rook
+        if(p instanceof  King && destination.getColumn() == source.getColumn() - 2){
+            Position sourceT = new Position(source.getRow(), source.getColumn() - 4);
+            Position targetT = new Position(sourceT.getRow(), source.getColumn() - 1);
+            ChessPiece rook = (ChessPiece)board.removePiece(sourceT);
+            board.placePiece(rook, targetT);
+            rook.increaseMoveCount();
+        }
+
         return capturedPiece;
     }
 
@@ -136,6 +155,25 @@ public class ChessMatch {
             capturedPieces.remove(capturetPiece);
             piecesOnTheBoard.add(capturetPiece);
         }
+
+        // #specialMove castling Kingside rook
+        if(p instanceof King && target.getColumn() == source.getColumn() + 2){
+            Position sourceT = new Position(source.getRow(), source.getColumn() + 3);
+            Position targetT = new Position(sourceT.getRow(), source.getColumn() + 1);
+            ChessPiece rook = (ChessPiece)board.removePiece(targetT);
+            board.placePiece(rook, sourceT);
+            rook.decreaseMoveCount();
+        }
+
+        // #specialMove castling QueenSide rook
+        if(p instanceof  King && target.getColumn() == source.getColumn() - 2){
+            Position sourceT = new Position(source.getRow(), source.getColumn() - 4);
+            Position targetT = new Position(sourceT.getRow(), source.getColumn() - 1);
+            ChessPiece rook = (ChessPiece)board.removePiece(targetT);
+            board.placePiece(rook, sourceT);
+            rook.decreaseMoveCount();
+        }
+
     }
 
     private void validateSourcePosition(Position position){
