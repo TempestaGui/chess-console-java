@@ -4,10 +4,7 @@ import org.aplicacao.program.boardGame.Board;
 import org.aplicacao.program.boardGame.Piece;
 import org.aplicacao.program.boardGame.Position;
 import org.aplicacao.program.chess.Exceptions.ChessException;
-import org.aplicacao.program.chess.pieces.Bishop;
-import org.aplicacao.program.chess.pieces.King;
-import org.aplicacao.program.chess.pieces.Pawn;
-import org.aplicacao.program.chess.pieces.Rook;
+import org.aplicacao.program.chess.pieces.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +55,11 @@ public class ChessMatch {
 
     private void initialSetup(){ //responsavel por iniciar a partida colocando as pecas no tabuleiro
         placeNewPiece('a', 1 ,new Rook(board, Color.Blue));
+        placeNewPiece('b', 1 ,new Knight(board, Color.Blue));
         placeNewPiece('c', 1 ,new Bishop(board, Color.Blue));
         placeNewPiece('e', 1 ,new King(board, Color.Blue));
         placeNewPiece('f', 1 ,new Bishop(board, Color.Blue));
+        placeNewPiece('g', 1, new Knight(board, Color.Blue));
         placeNewPiece('h', 1 ,new Rook(board, Color.Blue));
         placeNewPiece('a', 2 ,new Pawn(board, Color.Blue));
         placeNewPiece('b', 2 ,new Pawn(board, Color.Blue));
@@ -72,9 +71,11 @@ public class ChessMatch {
         placeNewPiece('h', 2 ,new Pawn(board, Color.Blue));
 
         placeNewPiece('a', 8 ,new Rook(board, Color.Red));
+        placeNewPiece('b', 8 ,new Knight(board, Color.Red));
         placeNewPiece('c', 8 ,new Bishop(board, Color.Red));
         placeNewPiece('e', 8 ,new King(board, Color.Red));
         placeNewPiece('f', 8 ,new Bishop(board, Color.Red));
+        placeNewPiece('g', 8 ,new Knight(board, Color.Red));
         placeNewPiece('h', 8 ,new Rook(board, Color.Red));
         placeNewPiece('a', 7 ,new Pawn(board, Color.Red));
         placeNewPiece('b', 7 ,new Pawn(board, Color.Red));
